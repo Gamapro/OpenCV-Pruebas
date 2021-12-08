@@ -37,7 +37,7 @@ def stackImages(scale,imgArray):
 
 width, height = 300,400
 
-webcam = cv2.VideoCapture(1) # En lugar de ingresar la direccion del video, un numero para el id
+webcam = cv2.VideoCapture(0) # En lugar de ingresar la direccion del video, un numero para el id
 webcam.set(3,600)  # Set width, id 3
 webcam.set(4,600)  # Set heigth, id 4
 webcam.set(10,100)  # Set brillo, id 10

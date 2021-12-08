@@ -36,15 +36,16 @@ def stackImages(scale,imgArray):
     return ver
 
 
-img = cv2.imread("/home/gama/Downloads/cosos/pato.jpeg")
-width, height = 300,400
+img = cv2.imread("rei_pouting.png")
+img = cv2.imread("exp1.jpg")
+img = cv2.imread("coche.jpg")
+width, height = 250,250
 
 def mi_funcion(val):
     return
 
 cv2.namedWindow("Trackbars")
-cv2.resizeWindow("Trackbars",300,20)
-
+cv2.resizeWindow("Trackbars",300,300)
 cv2.createTrackbar("Hue_Min","Trackbars",0,255,mi_funcion)
 cv2.createTrackbar("Hue_Max","Trackbars",100,255,mi_funcion)
 cv2.createTrackbar("Sat_Min","Trackbars",0,255,mi_funcion)
@@ -77,11 +78,16 @@ while True:
     mask2 = np.copy(mask)
 
     result = cv2.bitwise_and(mask,img,mask)
+    ntmask = cv2.bitwise_not(mask)
+    result_not = cv2.bitwise_and(ntmask,img, ntmask ) 
     #mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
 
-    imgStack = stackImages(1.2,[[img,mask2],[imgHSV,result]]) #np.hstack([img,imgHSV,mask2,result])
+    # imgStack = stackImages(1.2,[[img,mask2],[imgHSV,result]]) #np.hstack([img,imgHSV,mask2,result])
+    imgStack = stackImages(1.2,[[img,mask2],[result_not,result]]) #np.hstack([img,imgHSV,mask2,result])
 
     cv2.imshow("Resultados",imgStack)
+
+    cv2.imwrite('opencv_output_coche.jpg', imgStack)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
